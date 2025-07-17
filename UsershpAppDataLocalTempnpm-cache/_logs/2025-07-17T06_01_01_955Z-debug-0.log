@@ -1,0 +1,39 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\hp\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.0
+2 info using node@v22.16.0
+3 silly config load:file:C:\Users\hp\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\hp\Desktop\React practice\.npmrc
+5 silly config load:file:C:\Users\hp\.npmrc
+6 silly config load:file:C:\Users\hp\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm create vite@latest
+8 verbose argv "create" "vite@latest"
+9 verbose logfile logs-max:10 dir:C:\Users\hp\Desktop\React practice\UsershpAppDataLocalTempnpm-cache\_logs\2025-07-17T06_01_01_955Z-
+10 verbose logfile C:\Users\hp\Desktop\React practice\UsershpAppDataLocalTempnpm-cache\_logs\2025-07-17T06_01_01_955Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+13 http fetch GET 200 https://registry.npmjs.org/create-vite 519ms (cache miss)
+14 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+15 http fetch GET 200 https://registry.npmjs.org/npm 1062ms
+16 silly idealTree buildDeps
+17 silly fetch manifest create-vite@7.0.3
+18 silly packumentCache full:https://registry.npmjs.org/create-vite cache-miss
+19 http fetch GET 200 https://registry.npmjs.org/create-vite 271ms (cache miss)
+20 silly packumentCache full:https://registry.npmjs.org/create-vite set size:undefined disposed:false
+21 silly placeDep ROOT create-vite@7.0.3 OK for:  want: 7.0.3
+22 silly reify moves {}
+23 silly audit bulk request { 'create-vite': [ '7.0.3' ] }
+24 silly tarball no local data for create-vite@https://registry.npmjs.org/create-vite/-/create-vite-7.0.3.tgz. Extracting by manifest.
+25 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 351ms
+26 silly audit report {}
+27 http fetch GET 200 https://registry.npmjs.org/create-vite/-/create-vite-7.0.3.tgz 381ms (cache miss)
+28 verbose cwd C:\Users\hp\Desktop\React practice
+29 verbose os Windows_NT 10.0.26100
+30 verbose node v22.16.0
+31 verbose npm  v10.9.0
+32 notice
+32 notice New [31mmajor[39m version of npm available! [31m10.9.0[39m -> [34m11.4.2[39m
+32 notice Changelog: [34mhttps://github.com/npm/cli/releases/tag/v11.4.2[39m
+32 notice To update run: [4mnpm install -g npm@11.4.2[24m
+32 notice  { force: true, [Symbol(proc-log.meta)]: true }
+33 verbose exit 0
+34 info ok
