@@ -50,7 +50,7 @@ function SignupForm() {
         e.preventDefault();
 
         // Final validation
-        const newErrors = {};
+        // const newErrors = {};
         Object.keys(formData).forEach((key) =>
             validateField(key, formData[key])
         );
