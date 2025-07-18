@@ -1,5 +1,6 @@
 import { Eye, EyeOff, CheckCircle, XCircle, AlertCircle } from "lucide-react";
 import { useState } from "react";
+import FormInput from "./MyForm2Input";
 
 export default function MyFormValidation() {
     const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ export default function MyFormValidation() {
         password: "",
         confirmPassword: "",
     });
+
+    const [status, setStatus] = useState({});
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -21,44 +24,62 @@ export default function MyFormValidation() {
     };
 
     const validateForm = (name, value) => {
+        let message = "";
+
         switch (name) {
             case "username":
-                if (!value.trim()) return "Name is required";
-                if (value.trim().length < 4) {
-                    return "Username must be at least 4 characters";
+                if (!value.trim()) {
+                    message = "Name is required";
+                } else if (value.trim().length < 4) {
+                    message = "Username must be at least 4 characters";
+                } else if (/[^a-zA-Z0-9]/.test(value)) {
+                    message = "symbols not allowed";
+                } else {
+                    message = "Username looks good!";
                 }
-                if (/[^a-zA-Z0-9]/.test(value)) {
-                    return "symbols not allowed";
-                }
-                return "Username looks good!";
+                break;
 
             case "email":
-                if (!value.trim()) return "Email is required";
-                if (!/^\S+@\S+\.\S+$/.test(value)) {
-                    return "Email is invalid";
+                if (!value.trim()) {
+                    message = "Email is required";
+                } else if (!/^\S+@\S+\.\S+$/.test(value)) {
+                    message = "Email is invalid";
+                } else {
+                    message = "Email looks good!";
                 }
-                return "Email looks good!";
+                break;
 
             case "password":
-                if (!value.trim()) return "Password is required";
-                if (value.trim().length < 6) {
-                    return "Password must be at least 6 characters";
+                if (!value.trim()) {
+                    message = "Password is required";
+                } else if (value.trim().length < 6) {
+                    message = "Password must be at least 6 characters";
+                } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
+                    message =
+                        "Password must contain at least one uppercase letter, one lowercase letter, and one number";
+                } else {
+                    message = "Password looks good!";
                 }
-                if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
-                    return "Password must contain at least one uppercase letter, one lowercase letter, and one number";
-                }
-                return "Password looks good!";
+                break;
 
             case "confirmPassword":
-                if (!value.trim()) return "Please confirm your password";
-                if (value !== formData.password) {
-                    return "Passwords do not match";
+                if (!value.trim()) {
+                    message = "Please confirm your password";
+                } else if (value !== formData.password) {
+                    message = "Passwords do not match";
+                } else {
+                    message = "Passwords match!";
                 }
-                return "Passwords match!";
+                break;
 
             default:
                 return "";
         }
+
+        setStatus((prevStatus) => ({
+            ...prevStatus,
+            [name]: message,
+        }));
     };
 
     return (
@@ -75,110 +96,41 @@ export default function MyFormValidation() {
                     </div>
 
                     <div className="space-y-6">
-                        {/* Username Field - Valid State */}
-                        <div>
-                            <label
-                                htmlFor="username"
-                                className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                                Username
-                            </label>
-                            <div className="relative">
-                                <input
-                                    type="text"
-                                    name="username"
-                                    value={formData.username}
-                                    onChange={handleInputChange}
-                                    className="w-full px-4 py-3 text-black rounded-lg border-2 border-green-300 bg-green-50 focus:border-green-500 focus:ring-2 focus:ring-green-500 focus:outline-none transition-all duration-200"
-                                    placeholder="Enter your username"
-                                />
-                                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <CheckCircle className="w-5 h-5 text-green-500" />
-                                </div>
-                            </div>
-                            <p className="mt-2 text-sm text-green-600 flex items-center">
-                                <CheckCircle className="w-4 h-4 mr-1" />
-                                Username looks good!
-                            </p>
-                        </div>
+                        <FormInput
+                            name="username"
+                            label="Username"
+                            type="text"
+                            formData={formData}
+                            handleInputChange={handleInputChange}
+                            status={status}
+                        />
 
-                        {/* Email Field - Invalid State */}
-                        <div>
-                            <label
-                                htmlFor="email"
-                                className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                                Email Address
-                            </label>
-                            <div className="relative">
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleInputChange}
-                                    className="w-full px-4 py-3 text-black rounded-lg border-2 border-red-300 bg-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-200"
-                                    placeholder="Enter your email"
-                                />
-                                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <XCircle className="w-5 h-5 text-red-500" />
-                                </div>
-                            </div>
-                            <p className="mt-2 text-sm text-red-600 flex items-center">
-                                <AlertCircle className="w-4 h-4 mr-1" />
-                                Please enter a valid email address
-                            </p>
-                        </div>
+                        <FormInput
+                            name="email"
+                            label="Email"
+                            type="email"
+                            formData={formData}
+                            handleInputChange={handleInputChange}
+                            status={status}
+                        />
 
-                        {/* Password Field - Default State */}
-                        <div>
-                            <label
-                                htmlFor="password"
-                                className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                                Password
-                            </label>
-                            <div className="relative">
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={formData.password}
-                                    onChange={handleInputChange}
-                                    className="w-full px-4 py-3 text-black rounded-lg border-2 border-gray-300 bg-white hover:border-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200"
-                                    placeholder="Enter your password"
-                                />
-                                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                                    <Eye className="w-5 h-5 text-gray-500 hover:text-gray-700 cursor-pointer" />
-                                </div>
-                            </div>
-                        </div>
+                        <FormInput
+                            name="password"
+                            label="Password"
+                            type="password"
+                            formData={formData}
+                            handleInputChange={handleInputChange}
+                            status={status}
+                        />
 
-                        {/* Confirm Password Field - Invalid State */}
-                        <div>
-                            <label
-                                htmlFor="confirmPassword"
-                                className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                                Confirm Password
-                            </label>
-                            <div className="relative">
-                                <input
-                                    type="password"
-                                    name="confirmPassword"
-                                    value={formData.confirmPassword}
-                                    onChange={handleInputChange}
-                                    className="w-full px-4 py-3 text-black rounded-lg border-2 border-red-300 bg-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-200"
-                                    placeholder="Confirm your password"
-                                />
-                                <div className="absolute inset-y-0 right-0 flex items-center pr-3 space-x-2">
-                                    <XCircle className="w-5 h-5 text-red-500" />
-                                    <EyeOff className="w-5 h-5 text-gray-500 hover:text-gray-700 cursor-pointer" />
-                                </div>
-                            </div>
-                            <p className="mt-2 text-sm text-red-600 flex items-center">
-                                <AlertCircle className="w-4 h-4 mr-1" />
-                                Passwords do not match
-                            </p>
-                        </div>
+                        <FormInput
+                            name="confirmPassword"
+                            label="ConfirmPassword"
+                            type="password"
+                            formData={formData}
+                            handleInputChange={handleInputChange}
+                            status={status}
+                        />
 
                         {/* Submit Button */}
                         <button
