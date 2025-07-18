@@ -2,5 +2,5 @@ import "./App.css";
 import FormValidation from "./controlled-form/MyClaudeForm";
 
 export default function App() {
-    return <FormValidation />;
+    return <FormValidation type="form" />;
 }
