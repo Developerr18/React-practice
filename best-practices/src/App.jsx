@@ -1,8 +1,9 @@
 import "./App.css";
-import MyGame from "./Tic-Tac-Toe/MyGame";
+import Accordian from "./components/Accordian";
+// import MyGame from "./Tic-Tac-Toe/MyGame";
 // import FormValidation from "./controlled-form/MyClaudeForm";
 // import TodoApp from "./todo/TodoClaude";
 
 export default function App() {
-    return <MyGame />;
+    return <Accordian />;
 }
