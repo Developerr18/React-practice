@@ -4,26 +4,32 @@ import { data } from "./data";
 export default function Accordian() {
     const [selected, setSelected] = useState(null);
     const [enableMultiSelection, setEnableMultiSelection] = useState(false);
-    const [multipleSelected, setMultipleSelected] = useState([]);
+    const [multipleSelectedId, setMultipleSelectedId] = useState([]);
 
     function handleSingleSelection(currentId) {
         setSelected(currentId === selected ? null : currentId);
     }
 
     function handleMultiSelection(currentId) {
-        if (multipleSelected.includes(currentId)) {
-            setMultipleSelected(
-                multipleSelected.filter((id) => id !== currentId)
+        if (multipleSelectedId.includes(currentId)) {
+            setMultipleSelectedId(
+                multipleSelectedId.filter((id) => id !== currentId)
             );
         } else {
-            setMultipleSelected([...multipleSelected, currentId]);
+            setMultipleSelectedId([...multipleSelectedId, currentId]);
         }
+    }
+
+    function handleSelectionToggle() {
+        setEnableMultiSelection(!enableMultiSelection);
+        setSelected(null);
+        setMultipleSelectedId([]);
     }
 
     return (
         <div className="wrapper">
             <button
-                onClick={() => setEnableMultiSelection(!enableMultiSelection)}
+                onClick={handleSelectionToggle}
                 className="bg-black text-white px-2 py-1 cursor-pointer mb-5"
             >
                 {enableMultiSelection
@@ -48,6 +54,9 @@ export default function Accordian() {
                                 <span>+</span>
                             </div>
                             {selected === dataItem.id ? (
+                                <div>{dataItem.answer}</div>
+                            ) : null}
+                            {multipleSelectedId.includes(dataItem.id) ? (
                                 <div>{dataItem.answer}</div>
                             ) : null}
                         </div>
