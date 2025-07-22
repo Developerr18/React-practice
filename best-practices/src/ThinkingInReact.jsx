@@ -20,10 +20,74 @@ export default function ExampleApp() {
 
 function FilterableProductTable({ products }) {
     return (
-        <div>
+        <div className="m-4">
             <SearchBar />
             <ProductTable products={products} />
         </div>
+    );
+}
+
+function SearchBar() {
+    return (
+        <form>
+            <input className="border" type="text" placeholder="Search..." />
+            <p>
+                <input type="checkbox" /> Only show products in stock
+            </p>
+        </form>
+    );
+}
+
+function ProductTable({ products }) {
+    const rows = [];
+    let lastCategory = null;
+
+    products.forEach((product) => {
+        if (product.category !== lastCategory) {
+            rows.push(
+                <ProductCategoryRow
+                    key={product.category}
+                    category={product.category}
+                />
+            );
+        }
+        rows.push(<ProductRow product={product} key={product.name} />);
+        lastCategory = product.category;
+    });
+
+    return (
+        <table className="border-collapse border border-gray-300 mt-4">
+            <thead>
+                <tr>
+                    <th className="border border-gray-300 w-40">Name</th>
+                    <th className="border border-gray-300 w-12">Price</th>
+                </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+        </table>
+    );
+}
+
+function ProductCategoryRow({ category }) {
+    return (
+        <tr>
+            <th colSpan={2}>{category}</th>
+        </tr>
+    );
+}
+
+function ProductRow({ product }) {
+    const name = product.stocked ? (
+        product.name
+    ) : (
+        <span style={{ color: "red" }}>{product.name}</span>
+    );
+
+    return (
+        <tr>
+            <td>{name}</td>
+            <td>{product.price}</td>
+        </tr>
     );
 }
 
