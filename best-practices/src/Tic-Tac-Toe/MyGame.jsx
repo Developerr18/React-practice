@@ -47,7 +47,7 @@ export default function Game() {
                     onClick={() => setIsAcending(!isAscending)}
                     className="mb-4 ml-4 px-4 py-2 bg-gray-500 text-white rounded"
                 >
-                    Sort moves {isAscending ? "Descending" : "Ascending"}
+                    Sort {isAscending ? "Descending" : "Ascending"}
                 </button>
                 <ol>{isAscending ? moves : [...moves].reverse()}</ol>
             </div>
