@@ -23,7 +23,6 @@ function FilterableProductTable({ products }) {
         <div className="m-4">
             <SearchBar />
             <ProductTable products={products} />
-            <ProductTable />
         </div>
     );
 }
