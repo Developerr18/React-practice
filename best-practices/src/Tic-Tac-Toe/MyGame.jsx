@@ -134,8 +134,6 @@ function calculateWinner(squares) {
             squares[a] === squares[c]
         ) {
             return { winner: squares[a], line };
-        } else {
-            console.log("no winner yet");
         }
     }
 
