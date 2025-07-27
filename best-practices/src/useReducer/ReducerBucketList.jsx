@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 
 const initialArtworkList = [
   { id: 0, title: "Big Bellies", seen: false },

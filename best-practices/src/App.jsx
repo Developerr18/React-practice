@@ -1,6 +1,6 @@
 import "./App.css";
-import ReducerBucketList from "./useReducer/Reducer";
+import ReducerTodo from "./useReducer/ReducerTodo";
 
 export default function App() {
-  return <ReducerBucketList />;
+  return <ReducerTodo />;
 }
